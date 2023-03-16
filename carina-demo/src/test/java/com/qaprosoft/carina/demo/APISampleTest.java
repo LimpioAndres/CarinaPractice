@@ -18,12 +18,10 @@ package com.qaprosoft.carina.demo;
 import com.qaprosoft.apitools.validation.JsonCompareKeywords;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.core.foundation.api.APIMethodPoller;
+import com.qaprosoft.carina.demo.api.*;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.core.registrar.tag.Priority;
 import com.zebrunner.carina.core.registrar.tag.TestPriority;
-import com.qaprosoft.carina.demo.api.DeleteUserMethod;
-import com.qaprosoft.carina.demo.api.GetUserMethods;
-import com.qaprosoft.carina.demo.api.PostUserMethod;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +47,24 @@ public class APISampleTest implements IAbstractTest {
         setCases("4555,54545");
         PostUserMethod api = new PostUserMethod();
         api.setProperties("api/users/user.properties");
+
+        AtomicInteger counter = new AtomicInteger(0);
+
+        api.callAPIWithRetry()
+                .withLogStrategy(APIMethodPoller.LogStrategy.ALL)
+                .peek(rs -> counter.getAndIncrement())
+                .until(rs -> counter.get() == 4)
+                .pollEvery(1, ChronoUnit.SECONDS)
+                .stopAfter(10, ChronoUnit.SECONDS)
+                .execute();
+        api.validateResponse();
+    }
+
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    public void testCreateEmployee() throws Exception {
+        PostEmployeeMethod api = new PostEmployeeMethod();
+        api.setProperties("api/employee/employee.properties");
 
         AtomicInteger counter = new AtomicInteger(0);
 
