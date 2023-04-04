@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -72,5 +73,25 @@ public class PageObject4 extends AbstractPage {
 
     /*Finish Attritubes and methods for Javascript infinite scroll*/
     //---------------------------------------------------------------
+    /*Start Attritubes and methods for Drag and Drop*/
+
+    @FindBy(id = "draggable")
+    private ExtendedWebElement drag;
+
+    @FindBy(id = "droppable")
+    private ExtendedWebElement drop;
+
+    @FindBy(xpath = "//*[@id='content']/iframe")
+    private ExtendedWebElement frame;
+
+    public void switchFrame(){
+        getDriver().switchTo().frame(frame.getElement());
+    }
+
+    public void dragAndDropElement(){
+        dragAndDrop(drag,drop);
+    }
+
+    /*Finish Attritubes and methods for Drag and Drop*/
 
 }

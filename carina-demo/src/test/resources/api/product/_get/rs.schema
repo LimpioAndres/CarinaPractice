@@ -1,0 +1,56 @@
+{
+    "title": "rs",
+    "description": "Auto generated JSON schema based on the 'rs' file",
+    "type": "object",
+    "properties":{
+        "total":{
+          "type": "number"
+        },
+      "products":{
+        "type": "array",
+        "items":{
+            "properties":{
+              "id":{
+                  "type": "number"
+              },
+              "title":{
+                  "type": "string"
+              },
+              "description":{
+                  "type": "string"
+              },
+              "price":{
+                  "type": "number"
+              },
+              "discountPercentage":{
+                  "type": "number"
+              },
+              "rating":{
+                  "type": "number"
+              },
+              "stock":{
+                  "type": "number"
+              },
+              "brand":{
+                  "type": "string"
+              },
+              "category":{
+                  "type": "string"
+              },
+              "thumbnail":{
+                  "type": "string"
+              },
+              "images":{
+                  "type": "array"
+              }
+            }
+        }
+      },
+      "skip":{
+        "type": "number"
+      },
+      "limit":{
+        "type": "number"
+      }
+    }
+}
